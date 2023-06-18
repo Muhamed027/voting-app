@@ -11,8 +11,8 @@
 
         <div class="flex px-5 py-6">
             <a href="#" class="flex-none">
-                <img src="https://source.unsplash.com/200x200/?face&crop=face&v=4" alt="avatar"
-                    class="w-14 h-14 rounded-xl">
+                <img src="{{ $idea->author->avatar }}" alt="avatar"
+                class="w-14 h-14 rounded-xl">
             </a>
             <div class="mx-4">
                 <h4 class="text-xl font-semibold">
@@ -27,14 +27,14 @@
                         <div class="font-semibold text-gray-900">{{ $idea->author->name }}</div>
                         <div>{{ $idea->created_at->diffForHumans() }}</div>
                         <div>&bull;</div>
-                        <div>Category 1</div>
+                        <div>{{ $idea->category->name }}</div>
                         <div>&bull;</div>
                         <div class="text-gray-900">3 Comments</div>
                     </div>
                     <div x-data="{ isOpen: false }" class="flex items-center space-x-2">
                         <div
-                            class="bg-green-400 text-white text-xs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
-                            Implemented</div>
+                            class=" {{ $idea->status->classes }}bg-green-400 text-white text-xs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
+                            {{ $idea->status->name }}</div>
                         <button x-on:click="isOpen=!isOpen" x-on:click.away="isOpen=false" x-cloak
                             class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3">
                             <svg fill="currentColor" width="24" height="6">

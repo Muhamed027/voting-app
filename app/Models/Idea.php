@@ -11,6 +11,7 @@ class Idea extends Model
 {
     use HasFactory,Sluggable;
     protected $guarded=[];
+    const PAGINATION_COUNT=10;
 
     public function sluggable(): array
     {
@@ -25,7 +26,16 @@ class Idea extends Model
         return 'slug';
     }
 
+    //impleting the relationships 
+
     public function author(){
-        return $this->belongsTo(User::class,'user_id');
+        return self::belongsTo(User::class,'user_id');
+    }
+
+    public function category(){
+        return self::belongsTo(Category::class,'category_id');
+    }
+    public function status(){
+        return self::belongsTo(Status::class,'status_id');
     }
 }
