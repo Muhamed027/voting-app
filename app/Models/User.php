@@ -41,10 +41,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
     public function ideas()
     {
         return self::hasMany(Idea::class);
     }
+
+
+
+    public function votes(){
+        return self::belongsToMany(Idea::class,'votes');
+    }
+
+
+
 
     public function getAvatarAttribute()
     {

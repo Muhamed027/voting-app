@@ -2,16 +2,51 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Idea;
 use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Http\Response;
+
+
+
+
 
 class CreateIdea extends Component
 {
 
     public $title;
-    public $category=1;
+    public $category = 1;
     public $description;
+
+    protected $rules = [
+        'title' => 'required|min:4|max:256',
+        'category' => 'required',
+        'description' => 'required|min:6'
+
+    ];
+
+    public function createIdea()
+    {
+        if (auth()->check()) {
+            $this->validate();
+            Idea::create([
+                'user_id' => auth()->id(),
+                'category_id' => $this->category,
+                'status_id' => 1,
+                'title' => $this->title,
+                'description' => $this->description,
+            ]);
+            session()->flash('success', 'idea was added successfully');
+            return redirect()->route('Idea.index');
+        }
+
+        abort(Response::HTTP_FORBIDDEN);
+    }
+
     public function render()
     {
-        return view('livewire.create-idea');
+        return view('livewire.create-idea', [
+            'categories' => Category::all(),
+        ]);
     }
 }

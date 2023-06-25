@@ -1,20 +1,29 @@
-<form action="#" method="POST" class="text-sm  py-6 px-4 space-y-4">
+<form wire:submit.prevent="createIdea" action="#" method="POST" class="text-sm  py-6 px-4 space-y-4">
     <div>
-        <input type="text" placeholder="Your Idea"
-            class="w-full border-none bg-gray-100 rounded-xl placeholder-gray-900 px-4 py-2">
+        <input wire:model.defer="title" type="text" placeholder="Your Idea"
+            class="w-full border-none bg-gray-100 rounded-xl placeholder-gray-900 px-4 py-2" required>
     </div>
+    @error('title')
+        <p class="text-xs text-red-500 mt-4">{{ $message }}</p>
+    @enderror
     <div>
-        <select name="category_add" id="category_add"
+        <select wire:model.defer="category" name="category_add" id="category_add" required
             class="w-full bg-gray-100 rounded-xl border-none px-4 py-2">
-            <option value="Category One">Category One</option>
-            <option value="Category Two">Category Two</option>
-            <option value="Category Three">Category Three</option>
-            <option value="Category Four">Category Four</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
         </select>
+        @error('category')
+            <p class="text-xs text-red-500 mt-4">{{ $message }}</p>
+        @enderror
     </div>
     <div>
-        <textarea name="idea" id="idea" cols="26" rows="4"
-            class="bg-gray-100 border-none placeholder-gray-800 text-sm px-4 py-2 rounded-xl" placeholder="descripe your idea"></textarea>
+        <textarea wire:model.defer="description" name="idea" id="idea" cols="26" rows="4"
+            class="bg-gray-100 border-none placeholder-gray-800 text-sm px-4 py-2 rounded-xl" placeholder="descripe your idea"
+            required></textarea>
+        @error('description')
+            <p class="text-xs text-red-500 mt-4">{{ $message }}</p>
+        @enderror
     </div>
     <div class="flex items-center justify-between space-x-3">
         <button type="button"
@@ -30,5 +39,17 @@
             class="flex items-center justify-center w-1/2 h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
             <span class="ml-1">Submit</span>
         </button>
+    </div>
+    <div>
+
+        @if (session()->has('success'))
+            <div x-data="{ isVisible: true }" x-init="setTimeout(() => { isVisible = false }, 3000)" x-show.transition.duration.500ms="isVisible"
+                class="text-green-500 text-center mt-4">
+
+                {{ session('success') }}
+
+            </div>
+        @endif
+
     </div>
 </form>

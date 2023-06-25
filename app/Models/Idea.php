@@ -9,33 +9,74 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Idea extends Model
 {
-    use HasFactory,Sluggable;
-    protected $guarded=[];
-    const PAGINATION_COUNT=10;
+    use HasFactory, Sluggable;
+
+
+    protected $guarded = [];
+
+
+    const PAGINATION_COUNT = 10;
 
     public function sluggable(): array
     {
         return [
-            'slug'=>[
-                'source'=>'title',
+            'slug' => [
+                'source' => 'title',
             ]
         ];
     }
+
+
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    //impleting the relationships 
 
-    public function author(){
-        return self::belongsTo(User::class,'user_id');
+
+
+    public function author()
+    {
+        return self::belongsTo(User::class, 'user_id');
     }
 
-    public function category(){
-        return self::belongsTo(Category::class,'category_id');
+    
+
+    public function category()
+    {
+        return self::belongsTo(Category::class, 'category_id');
     }
-    public function status(){
-        return self::belongsTo(Status::class,'status_id');
+
+    public function status()
+    {
+        return self::belongsTo(Status::class, 'status_id');
+    }
+
+    public function votes()
+    {
+        return self::belongsToMany(User::class, 'votes');
+    }
+
+    public function isVotedByUser( ? User $user)
+    {
+        if(!$user){
+            return false;
+        }
+
+        return Vote::where('user_id', $user->id)
+            ->where('idea_id', $this->id)
+            ->exists();
+    }
+    public function vote(User $user){
+        Vote::create([
+            'user_id'=>$user->id,
+            'idea_id'=>$this->id
+        ]);
+    }
+    public function removeVote(User $user){
+        Vote::where('idea_id',$this->id)
+            ->where('user_id',$user->id)
+            ->first()
+            ->delete();
     }
 }

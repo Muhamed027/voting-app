@@ -38,6 +38,9 @@
     border: 7px solid white;
     box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, 0.08);
     left: -73px;
-    background: green;
+    background: rgb(99, 238, 99);
     opacity: 1;
+}
+.bg-green{
+    background: rgb(99, 238, 99);
 }

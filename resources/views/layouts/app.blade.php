@@ -62,7 +62,7 @@
                     @endauth
                 </div>
                 @auth
-                <livewire:create-idea/>
+                    <livewire:create-idea />
                 @else
                     <div class="my-28 text-center flex justify-between mx-2">
                         <a href="{{ route('login') }}"
@@ -70,9 +70,9 @@
                             log in
                         </a>
                         <a href="{{ route('register') }}"
-                        class="flex items-center justify-center w-2/5 h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-3   py-3">
-                        Sign Up
-                    </a>
+                            class="flex items-center justify-center w-2/5 h-11 text-xs bg-blue-400 text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-3   py-3">
+                            Sign Up
+                        </a>
                     </div>
                 @endauth
 
