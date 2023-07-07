@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Idea;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class IdeaShow extends Component
 {
@@ -12,26 +13,8 @@ class IdeaShow extends Component
     public $hasVoted;
 
 
-
-    public function vote()
-    {
-        if (! auth()->check()) {
-            return redirect(route('login'));
-        }
-
-        if ($this->hasVoted) {
-            $this->idea->removeVote(auth()->user());
-            $this->votesCount--;
-            $this->hasVoted = false;
-        } else {
-            $this->idea->vote(auth()->user());
-            $this->votesCount++;
-            $this->hasVoted = true;
-        }
-    }
-
-
-
+    protected $listeners=['statusWasUpdated'];
+    
     public function mount(Idea $idea,$votesCount){
         $this->idea=$idea;
 
@@ -41,6 +24,29 @@ class IdeaShow extends Component
         $this->hasVoted=$idea->isVotedByUser(auth()->user());
 
     }
+
+    public function statusWasUpdated(){
+        $this->idea->refresh();
+    }
+    public function vote()
+    {
+        if (! auth()->check()) {
+            return redirect(route('login'));
+        }
+
+        if ($this->hasVoted) {
+            $this->idea->removeVote(Auth::user());
+            $this->votesCount--;
+            $this->hasVoted = false;
+        } else {
+            $this->idea->vote(Auth::user());
+            $this->votesCount++;
+            $this->hasVoted = true;
+        }
+    }
+
+
+
 
 
     public function render()

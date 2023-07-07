@@ -1,15 +1,14 @@
 <x-app-layout>
     <div>
-        <a href="{{ route('Idea.index') }}" class="flex items-center font-semibold hover:underline">
+        <a href="{{ $backUrl }}" class="flex items-center font-semibold hover:underline">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
-            <span class="ml-2"> All ideas</span>
+            <span class="ml-2"> All ideas(Or back to chosen category with filters )</span>
         </a>
     </div>
-    <livewire:idea-show :idea="$idea"  :votesCount="$votesCount" />
-
-
+    <livewire:idea-show :idea="$idea" :votesCount="$votesCount" />
+    <livewire:edit-idea />
     <div class="comments-container relative">
         <div class="comment-container relative space-y-6 ml-24">
             <div class="  transition duration-150 ease-in bg-white mt-4 rounded-xl flex">
@@ -42,8 +41,8 @@
                                 <div>&bull;</div>
 
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <button x-on:click="isOpen=!isOpen" x-on:click.away="isOpen=false" x-cloak
+                            <div class="flex items-center space-x-2" x-cloak>
+                                <button x-on:click="isOpen=!isOpen" x-on:click.away="isOpen=false" x-clock 
                                     class="relative bg-gray-100 hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3">
                                     <svg fill="currentColor" width="24" height="6">
                                         <path
@@ -52,12 +51,24 @@
                                     </svg>
                                     <ul x-show="isOpen" x-transition.origin.top.left.duration.500ms
                                         class=" absolute w-44 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 ml-8">
-                                        <li><a href="#"
+                                        <li>
+                                            <a href="#"
                                                 class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark
-                                                as Spam</a></li>
-                                        <li><a href="#"
+                                                edit Idea
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
                                                 class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete
-                                                Post</a></li>
+                                                Post
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark
+                                                as Spam
+                                            </a>
+                                        </li>
                                     </ul>
                                 </button>
                             </div>

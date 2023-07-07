@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+Artisan::command('custom:command', function () {
+    $this->info('This is a custom artisan command!');
+})->describe('A description of your custom command');

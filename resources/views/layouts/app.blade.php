@@ -79,34 +79,21 @@
             </div>
         </div>
         <div style="max-width:700px">
-            <nav class="flex items-center space-x-32 text-xs">
-                <ul class="flex uppercase font-semibold border-b-4 pb-3 space-x-7">
-                    <li><a href="" class=" border-b-4 pb-3 border-blue-500">All Ideas (87)</a></li>
-                    <li><a href=""
-                            class="transition border-b-4 pb-3 ease-in duration-150 hover:text-blue-600 hover:border-blue-600">considering
-                            (6)</a></li>
-                    <li><a href=""
-                            class="transition border-b-4 pb-3 ease-in duration-150 hover:text-blue-600 hover:border-blue-600">In
-                            progress (1)</a></li>
-                </ul>
-
-
-                <ul class="flex uppercase font-semibold border-b-4 pb-3 space-x-7">
-                    <li><a href=""
-                            class="transition border-b-4 pb-3 ease-in duration-150 hover:text-blue-600 hover:border-blue-600">Implemented
-                            (10)</a></li>
-                    <li><a href=""
-                            class="transition border-b-4 pb-3 ease-in duration-150 hover:text-blue-600 hover:border-blue-600">closed
-                            (55)</a></li>
-
-                </ul>
-            </nav>
+            <livewire:status-filters />
             <div class="mt-8">
                 {{ $slot }}
             </div>
         </div>
     </main>
     <livewire:scripts />
+    {{-- @push('scripts')
+        <script>
+            // Listen for the votesUpdated event and update the vote count
+            Livewire.on('votesUpdated', votesCount => {
+                document.querySelector('#votes-count').textContent = votesCount;
+            });
+        </script>
+    @endpush --}}
 </body>
 
 </html>

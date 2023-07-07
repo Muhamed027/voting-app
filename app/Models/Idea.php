@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Exceptions\VoteNotFoundException;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -31,9 +32,6 @@ class Idea extends Model
     {
         return 'slug';
     }
-
-
-
 
     public function author()
     {
@@ -74,9 +72,14 @@ class Idea extends Model
         ]);
     }
     public function removeVote(User $user){
-        Vote::where('idea_id',$this->id)
-            ->where('user_id',$user->id)
-            ->first()
-            ->delete();
+        $voteToDelete=Vote::where('user_id', $user->id)
+        ->where('idea_id', $this->id)
+        ->first();
+        if($voteToDelete){
+            $voteToDelete->delete();
+        }
+        else{
+            throw new VoteNotFoundException;
+        }
     }
 }

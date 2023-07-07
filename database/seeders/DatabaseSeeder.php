@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
         User::factory(19)->create();
 
         // \App\Models\User::factory(10)->create();
-        Category::factory()->create(['name' => 'category 1 ']);
-        Category::factory()->create(['name' => 'category 2 ']);
-        Category::factory()->create(['name' => 'category 3 ']);
-        Category::factory()->create(['name' => 'category 4 ']);
+        Category::factory()->create(['name' => 'Category 1']);
+        Category::factory()->create(['name' => 'Category 2']);
+        Category::factory()->create(['name' => 'Category 3']);
+        Category::factory()->create(['name' => 'Category 4']);
 
 
 
@@ -39,12 +39,12 @@ class DatabaseSeeder extends Seeder
         Status::factory()->create(['name' => 'closed', 'classes' => 'bg-red-500 text-white']);
 
 
-        Idea::factory(100)->create();
+        Idea::factory(15467)->create();
 
 
         //generate unique votes ensure idea_id and user_is are unique for each row 
         foreach (range(1, 20) as $user_id) {
-            foreach (range(1, 100) as $idea_id) {
+            foreach (range(1, 15467) as $idea_id) {
                 if ($idea_id % 2 == 0) {
                     Vote::factory()->create([
                         'user_id' => $user_id,

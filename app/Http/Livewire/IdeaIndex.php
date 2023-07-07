@@ -18,13 +18,14 @@ class IdeaIndex extends Component
         }
         if($this->hasVoted){
             $this->idea->removeVote(auth()->user());
-            $this->votesCount=$this->votesCount-1;
+            $this->votesCount--;
             $this->hasVoted=false;
         }else{
             $this->idea->vote(auth()->user());
             $this->votesCount++;
             $this->hasVoted=true;
         }
+        // $this->emit('votesUpdated', $this->votesCount);
     }
 
     public function mount(Idea $idea,$votesCount){
