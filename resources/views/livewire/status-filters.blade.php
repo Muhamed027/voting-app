@@ -1,8 +1,8 @@
-<nav class="flex items-center space-x-32 text-gray-500 text-xs">
+<nav class="flex items-center space-x-32 dark:text-white dark:bg-slate-900 text-gray-500 text-xs">
     <ul class="flex uppercase font-semibold border-b-4 pb-3  space-x-3">
         <li>
             <a wire:click.prevent="setStatus('All')" href="{{ route('Idea.index',['status'=>'All']) }}"
-                class=" border-b-4 pb-3 ease-in duration-150 @if ($status === 'All') text-gray-900 border-blue-600 @endif ">All
+                class=" border-b-4 pb-3 ease-in duration-150 @if ($status === 'All') border-blue-600 @endif ">All
                 Ideas
                 @if (!($status_count['all_status']))
                     (+99)

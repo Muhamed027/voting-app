@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use App\Exceptions\VoteNotFoundException;
 use App\Models\User;
-use Cviebrock\EloquentSluggable\Sluggable;
+use App\Models\Vote;
+use App\Models\Status;
+use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\VoteNotFoundException;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Idea extends Model
@@ -16,7 +20,7 @@ class Idea extends Model
     protected $guarded = [];
 
 
-    const PAGINATION_COUNT = 10;
+    const PAGINATION_COUNT = 30;
 
     public function sluggable(): array
     {
@@ -31,6 +35,9 @@ class Idea extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    public function comments(){
+        return self::hasMany(Comment::class);
     }
 
     public function author()

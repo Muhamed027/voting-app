@@ -1,4 +1,5 @@
-<div class="idea-container hover:shadow-md transition duration-150 ease-in bg-white rounded-xl flex cursor-pointer">
+<div
+    class="idea-container hover:shadow-md transition dark:text-white dark:bg-slate-800 duration-150 ease-in bg-white rounded-xl flex cursor-pointer">
     <div class="border-r border-gray-100 px-5 py-8">
         <div class="text-center">
             <div class="font-semibold text-2xl @if ($hasVoted) text-blue-500 @endif">
@@ -13,8 +14,8 @@
                     <span>voted</span>
                 </button>
             @else
-                <button wire:click.prevent="vote" 
-                    class="w-20 bg-gray-200 border border-gray-200 hover:border-gray-400 font-bold text-xs uppercase rounded-xl transition duration-150 ease-in px-4 py-3">
+                <button wire:click.prevent="vote"
+                    class="w-20 dark:bg-slate-600 border bg-gray-200 border-gray-200 hover:border-gray-400 font-bold text-xs uppercase rounded-xl transition duration-150 ease-in px-4 py-3">
                     <span>vote</span>
                 </button>
             @endif
@@ -30,6 +31,11 @@
                     {{ $idea->title }}</a>
             </h4>
             <div class="text-gray-600 mt-3 line-clamp-3">
+                @admin
+                    @if ($idea->spam_reports > 0)
+                        <div class="text-xs text-red-500 mb-2">Spam Reports : {{ $idea->spam_reports }}</div>
+                    @endif
+                @endadmin
                 {{ $idea->description }}
             </div>
 
@@ -39,7 +45,7 @@
                     <div>&bull;</div>
                     <div>{{ $idea->category->name }}</div>
                     <div>&bull;</div>
-                    <div class="text-gray-900">3 Comments</div>
+                    <div class="text-gray-900">{{ $idea->comments_count }} Comments</div>
                 </div>
                 <div x-data="{ isOpen: false }" class="flex items-center space-x-2">
                     <div

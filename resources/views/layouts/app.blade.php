@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="d" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans bg-gray-100 max-w-7xl mx-auto text-gray-900 text-sm">
+<body class="font-sans bg-gray-100 dark:text-white dark:bg-slate-900 max-w-7xl mx-auto text-gray-900 text-sm">
     <header class="flex items-center  justify-between px-8  py-2">
         <a href="#"> voting Logo</a>
         <div class="flex items-center">
@@ -52,7 +52,7 @@
     </header>
     <main class="container mx-auto flex" style="max-width:1000px">
         <div style="max-width:280px; margin-right:20px">
-            <div class="border-2 bg-white border-blue-100 rounded-xl mt-16">
+            <div class="border-2 bg-white dark:bg-slate-800 dark:border-black border-blue-100 rounded-xl mt-16">
                 <div class="text-center px-6 py-2 pt-6">
                     <h3 class="font-semibold text-base">Add an idea</h3>
                     @auth

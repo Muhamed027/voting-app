@@ -42,7 +42,7 @@ class IdeaStatusUpdatedMailable extends Mailable
             markdown: 'emails.idea-status-updated',
             with:[
                 'url'=>route('Idea.show',$this->idea);
-            ]
+            ],
         );
     }
 
